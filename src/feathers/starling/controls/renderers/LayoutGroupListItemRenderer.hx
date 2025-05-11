@@ -1,10 +1,11 @@
 /*
-Feathers
-Copyright 2012-2021 Bowler Hat LLC. All Rights Reserved.
+	Feathers
+	Copyright 2012-2021 Bowler Hat LLC. All Rights Reserved.
 
-This program is free software. You can redistribute and/or modify it in
-accordance with the terms of the accompanying license agreement.
-*/
+	This program is free software. You can redistribute and/or modify it in
+	accordance with the terms of the accompanying license agreement.
+ */
+
 package feathers.starling.controls.renderers;
 
 import feathers.starling.controls.LayoutGroup;
@@ -35,8 +36,7 @@ import starling.events.Event;
  *
  * @productversion Feathers 1.2.0
  */
-class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRenderer
-{
+class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRenderer {
 	/**
 	 * The default <code>IStyleProvider</code> for all <code>LayoutGroupListItemRenderer</code>
 	 * components.
@@ -45,125 +45,139 @@ class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRender
 	 * @see feathers.core.FeathersControl#styleProvider
 	 */
 	public static var globalStyleProvider:IStyleProvider;
-	
+
 	/**
 	 * Constructor.
 	 */
-	public function new() 
-	{
+	public function new() {
 		super();
 	}
-	
+
 	/**
 	 * @private
 	 */
-	override function get_defaultStyleProvider():IStyleProvider 
-	{
+	override function get_defaultStyleProvider():IStyleProvider {
 		return LayoutGroupListItemRenderer.globalStyleProvider;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var index(get, set):Int;
+
 	private var _index:Int = -1;
-	private function get_index():Int { return this._index; }
-	private function set_index(value:Int):Int
-	{
+
+	private function get_index():Int {
+		return this._index;
+	}
+
+	private function set_index(value:Int):Int {
 		return this._index = value;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var owner(get, set):List;
+
 	private var _owner:List;
-	private function get_owner():List { return this._owner; }
-	private function set_owner(value:List):List
-	{
-		if (this._owner == value)
-		{
+
+	private function get_owner():List {
+		return this._owner;
+	}
+
+	private function set_owner(value:List):List {
+		if (this._owner == value) {
 			return value;
 		}
 		this._owner = value;
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_DATA);
 		return this._owner;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var data(get, set):Dynamic;
+
 	private var _data:Dynamic;
-	private function get_data():Dynamic { return this._data; }
-	private function set_data(value:Dynamic):Dynamic
-	{
-		if (this._data == value)
-		{
+
+	private function get_data():Dynamic {
+		return this._data;
+	}
+
+	private function set_data(value:Dynamic):Dynamic {
+		if (this._data == value) {
 			return value;
 		}
 		this._data = value;
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_DATA);
-		//LayoutGroup doesn't know about INVALIDATION_FLAG_DATA, so we need
-		//set set another flag that it understands.
+		// LayoutGroup doesn't know about INVALIDATION_FLAG_DATA, so we need
+		// set set another flag that it understands.
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_SIZE);
 		return this._data;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var isSelected(get, set):Bool;
+
 	private var _isSelected:Bool;
-	private function get_isSelected():Bool { return this._isSelected; }
-	private function set_isSelected(value:Bool):Bool
-	{
-		if (this._isSelected == value)
-		{
+
+	private function get_isSelected():Bool {
+		return this._isSelected;
+	}
+
+	private function set_isSelected(value:Bool):Bool {
+		if (this._isSelected == value) {
 			return value;
 		}
 		this._isSelected = value;
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_SELECTED);
-		//the state flag is needed for updating the background
+		// the state flag is needed for updating the background
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_STATE);
 		this.dispatchEventWith(Event.CHANGE);
 		return this._isSelected;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var factoryID(get, set):String;
+
 	private var _factoryID:String;
-	private function get_factoryID():String { return this._factoryID; }
-	private function set_factoryID(value:String):String
-	{
+
+	private function get_factoryID():String {
+		return this._factoryID;
+	}
+
+	private function set_factoryID(value:String):String {
 		return this._factoryID = value;
 	}
-	
+
 	/**
 	 * @inheritDoc
 	 */
 	public var backgroundSelectedSkin(get, set):DisplayObject;
+
 	private var _backgroundSelectedSkin:DisplayObject;
-	private function get_backgroundSelectedSkin():DisplayObject { return this._backgroundSelectedSkin; }
-	private function set_backgroundSelectedSkin(value:DisplayObject):DisplayObject
-	{
-		if (this.processStyleRestriction("backgroundSelectedSkin"))
-		{
-			if (value != null)
-			{
+
+	private function get_backgroundSelectedSkin():DisplayObject {
+		return this._backgroundSelectedSkin;
+	}
+
+	private function set_backgroundSelectedSkin(value:DisplayObject):DisplayObject {
+		if (this.processStyleRestriction("backgroundSelectedSkin")) {
+			if (value != null) {
 				value.dispose();
 			}
 			return value;
 		}
-		if (this._backgroundSelectedSkin == value)
-		{
+		if (this._backgroundSelectedSkin == value) {
 			return value;
 		}
-		if (this._backgroundSelectedSkin != null &&
-			this.currentBackgroundSkin == this._backgroundSelectedSkin)
-		{
+		if (this._backgroundSelectedSkin != null && this.currentBackgroundSkin == this._backgroundSelectedSkin) {
 			this.removeCurrentBackgroundSkin(this._backgroundSelectedSkin);
 			this.currentBackgroundSkin = null;
 		}
@@ -171,52 +185,47 @@ class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRender
 		this.invalidate(FeathersControl.INVALIDATION_FLAG_SKIN);
 		return this._backgroundSelectedSkin;
 	}
-	
+
 	/**
 	 * @private
 	 */
-	override public function dispose():Void
-	{
+	override public function dispose():Void {
 		this.owner = null;
 		super.dispose();
 	}
-	
+
 	/**
 	 * @private
 	 */
-	override protected function draw():void
-	{
-		//children are allowed to change during draw() in a subclass up
-		//until it calls super.draw().
+	override public function draw():Void {
+		// children are allowed to change during draw() in a subclass up
+		// until it calls super.draw().
 		this._ignoreChildChangesButSetFlags = false;
-		
+
 		var dataInvalid:Bool = this.isInvalid(FeathersControl.INVALIDATION_FLAG_DATA);
 		var scrollInvalid:Bool = this.isInvalid(FeathersControl.INVALIDATION_FLAG_SCROLL);
 		var sizeInvalid:Bool = this.isInvalid(FeathersControl.INVALIDATION_FLAG_SIZE);
 		var layoutInvalid:Bool = this.isInvalid(FeathersControl.INVALIDATION_FLAG_LAYOUT);
-		
-		if (dataInvalid)
-		{
+
+		if (dataInvalid) {
 			this.commitData();
 		}
-		
-		if (scrollInvalid || sizeInvalid || layoutInvalid)
-		{
+
+		if (scrollInvalid || sizeInvalid || layoutInvalid) {
 			this._ignoreChildChanges = true;
 			this.preLayout();
 			this._ignoreChildChanges = false;
 		}
-		
+
 		super.draw();
-		
-		if (scrollInvalid || sizeInvalid || layoutInvalid)
-		{
+
+		if (scrollInvalid || sizeInvalid || layoutInvalid) {
 			this._ignoreChildChanges = true;
 			this.postLayout();
 			this._ignoreChildChanges = false;
 		}
 	}
-	
+
 	/**
 	 * Makes final changes to the layout before it updates the item
 	 * renderer's children. If your layout requires changing the
@@ -237,10 +246,7 @@ class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRender
 	 *
 	 * @see #postLayout()
 	 */
-	private function preLayout():Void
-	{
-		
-	}
+	private function preLayout():Void {}
 
 	/**
 	 * Called after the layout updates the item renderer's children. If any
@@ -259,10 +265,7 @@ class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRender
 	 *
 	 * @see #preLayout()
 	 */
-	private function postLayout():Void
-	{
-		
-	}
+	private function postLayout():Void {}
 
 	/**
 	 * Updates the renderer to display the item's data. Override this
@@ -270,25 +273,18 @@ class LayoutGroupListItemRenderer extends LayoutGroup implements IListItemRender
 	 *
 	 * <p>Don't forget to handle the case where the data is <code>null</code>.</p>
 	 */
-	private function commitData():Void
-	{
-		
-	}
-	
+	private function commitData():Void {}
+
 	/**
 	 * @private
 	 */
-	override function getCurrentBackgroundSkin():DisplayObject
-	{
-		if (!this._isEnabled && this._backgroundDisabledSkin != null)
-		{
+	override function getCurrentBackgroundSkin():DisplayObject {
+		if (!this._isEnabled && this._backgroundDisabledSkin != null) {
 			return this._backgroundDisabledSkin;
 		}
-		if (this._isSelected && this._backgroundSelectedSkin != null)
-		{
+		if (this._isSelected && this._backgroundSelectedSkin != null) {
 			return this._backgroundSelectedSkin;
 		}
 		return this._backgroundSkin;
 	}
-	
 }
